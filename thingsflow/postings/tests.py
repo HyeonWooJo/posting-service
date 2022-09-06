@@ -7,6 +7,9 @@ from django.test import TestCase, Client
 from postings.models import Posting
 
 
+'''
+게시물 리스트 API unit test
+'''
 class PostingListView(TestCase):
     def setUp(self):
         Posting.objects.create(
@@ -19,6 +22,9 @@ class PostingListView(TestCase):
     def tearDown(self):
         Posting.objects.all().delete()
 
+    '''
+    게시물 리스트 API success unit test
+    '''
     def test_success_list_view_get(self):
         client   = Client()
         response = client.get(
@@ -33,6 +39,9 @@ class PostingListView(TestCase):
         }]})
 
 
+'''
+게시물 상세 API unit test
+'''
 class PostingDetailView(TestCase):
     def setUp(self):
         Posting.objects.create(
@@ -46,6 +55,9 @@ class PostingDetailView(TestCase):
     def tearDown(self):
         Posting.objects.all().delete()
 
+    '''
+    게시물 리스트 API success unit test
+    '''
     def test_success_detail_view_post(self):
         client   = Client()
         body     = {
@@ -61,6 +73,9 @@ class PostingDetailView(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), {'message' : 'SUCCESS'})
 
+    '''
+    게시물 리스트 API success unit test
+    '''
     def test_success_detail_view_update(self):
         client   = Client()
         body     = {
@@ -77,6 +92,9 @@ class PostingDetailView(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), {'message': 'UPDATED'})
 
+    '''
+    게시물 리스트 API success unit test
+    '''
     def test_success_detail_view_delete(self):
         client   = Client()
         body     = {
