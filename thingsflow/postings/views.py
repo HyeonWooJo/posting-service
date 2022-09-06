@@ -107,6 +107,7 @@ class PostingListView(View):
                 'id': posting.id,
                 'title': posting.title,
                 'context': posting.context[:10],
+                'created_at': str(posting.created_at)[:-7]
             }
             for posting in postings
         ]
