@@ -78,6 +78,6 @@ Language | Framwork | Database | HTTP | Tools
 ---
 
 # 6. 참조 문서
-- [Postman API Docs](https://documenter.getpostman.com/view/11682851/VUxVpPbo)
+- [Postman API Docs](https://documenter.getpostman.com/view/21254145/VV4xww9H)
 
 
