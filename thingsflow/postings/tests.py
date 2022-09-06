@@ -7,6 +7,9 @@ from django.test import TestCase, Client
 from postings.models import Posting
 
 
+'''
+게시물 리스트 API unit test
+'''
 class PostingListView(TestCase):
     def setUp(self):
         Posting.objects.create(
@@ -19,10 +22,13 @@ class PostingListView(TestCase):
     def tearDown(self):
         Posting.objects.all().delete()
 
+    '''
+    게시물 리스트 조회 API success unit test
+    '''
     def test_success_list_view_get(self):
         client   = Client()
         response = client.get(
-            "/postings?offset=0&limit=1", 
+            '/postings?offset=0&limit=1', 
             content_type='application/json')
 
         self.assertEqual(response.status_code, 200)
@@ -33,6 +39,9 @@ class PostingListView(TestCase):
         }]})
 
 
+'''
+게시물 상세 API unit test
+'''
 class PostingDetailView(TestCase):
     def setUp(self):
         Posting.objects.create(
@@ -46,47 +55,57 @@ class PostingDetailView(TestCase):
     def tearDown(self):
         Posting.objects.all().delete()
 
+    '''
+    게시물 상세 포스팅 API success unit test
+    '''
     def test_success_detail_view_post(self):
-        client   = Client()
-        body     = {
+        client = Client()
+        body   = {
             'title'   : 'Breaking Bad',
             'context' : 'Best American Drama',
             'psword'  : 'test1234',
         }
         response = client.post(
-            "/postings/detail",
+            '/postings/detail',
             data=json.dumps(body),
             content_type='application/json')
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), {'message' : 'SUCCESS'})
 
+    '''
+    게시물 상세 조회 API success unit test
+    '''
     def test_success_detail_view_update(self):
-        client   = Client()
-        body     = {
+        client = Client()
+        body   = {
             'title'     : 'Breaking Bad',
             'context'   : 'Best American Drama',
             'psword'    : 'test1234',
             'posting_id': 1
         }
         response = client.post(
-            "/postings/detail",
+            '/postings/detail',
             data=json.dumps(body),
             content_type='application/json')
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), {'message': 'UPDATED'})
 
+    '''
+    게시물 상세 삭제 API success unit test
+    '''
     def test_success_detail_view_delete(self):
-        client   = Client()
-        body     = {
+        client = Client()
+        body   = {
             'psword'    : 'test1234',
             'posting_id': 1
         }
         response = client.delete(
-            "/postings/detail",
+            '/postings/detail',
             data=json.dumps(body),
             content_type='application/json')
+        print(response)
 
         self.assertEqual(response.status_code, 204)
         self.assertEqual(response.json(), {'message': 'DATA_DELETED'})

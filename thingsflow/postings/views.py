@@ -11,7 +11,7 @@ from .models     import Posting
 
 
 '''
-게시물 포스팅 상세 API
+게시물 상세 API
 '''
 class PostingDetailView(View):
     '''
@@ -32,10 +32,10 @@ class PostingDetailView(View):
 
             if Posting.objects.filter(id=posting_id).exists():
                 Posting.objects.filter(id=posting_id).update(
-                    title   = data["title"],
-                    context = data["context"],
+                    title   = data['title'],
+                    context = data['context'],
                 )
-                return JsonResponse({"message": "UPDATED"}, status=201)
+                return JsonResponse({'message': 'UPDATED'}, status=201)
 
             hashed_password  = bcrypt.hashpw(psword.encode('utf-8'), bcrypt.gensalt())
             decoded_password = hashed_password.decode('utf-8')
@@ -75,15 +75,15 @@ class PostingDetailView(View):
 
             posting.delete()
 
-            return JsonResponse({"message": "DATA_DELETED"}, status=204)
+            return JsonResponse({'message': 'DATA_DELETED'}, status=204)
         except KeyError:
-            return JsonResponse({"message": "KEY_ERROR"}, status=400)
+            return JsonResponse({'message': 'KEY_ERROR'}, status=400)
         except Posting.DoesNotExist:
-            return JsonResponse({"message": "POSTING_DOES_NOT_EXIST"}, status=400)
+            return JsonResponse({'message': 'POSTING_DOES_NOT_EXIST'}, status=400)
 
 
 '''
-게시물 포스팅 리스트 API
+게시물 리스트 API
 '''
 class PostingListView(View):
     '''
@@ -104,11 +104,11 @@ class PostingListView(View):
 
         results = [
             {
-                "id": posting.id,
-                "title": posting.title,
-                "context": posting.context[:10],
+                'id': posting.id,
+                'title': posting.title,
+                'context': posting.context[:10],
             }
             for posting in postings
         ]
 
-        return JsonResponse({"results": results}, status=200)
+        return JsonResponse({'results': results}, status=200)
