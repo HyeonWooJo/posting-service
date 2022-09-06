@@ -1,11 +1,11 @@
 # 📎 목차
 
-1. [Posting Service](#-Posting-Service)
-2. [요구사항 및 분석](#-요구사항-및-분석)
-4. [기술 스택](#-기술-스택)
-5. [API Endpoints](#-api-endpoints)
-6. [ERD](#-erd)
-7. [참조 문서](#-참조-문서)
+1. [Posting Service]
+2. [요구사항 및 분석]
+4. [기술 스택]
+5. [API Endpoints]
+6. [ERD]
+7. [참조 문서]
 
 <br>
 
