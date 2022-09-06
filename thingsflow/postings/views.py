@@ -37,13 +37,13 @@ class PostingDetailView(View):
                 psword  = decoded_password
             )
 
-            return JsonResponse({'MESSAGE' : 'SUCCESS'}, status = 201)
+            return JsonResponse({'message': 'SUCCESS'}, status = 201)
         
         except KeyError:
-            return JsonResponse({'MESSAGE' : 'KEY_ERROR'}, status = 400)
+            return JsonResponse({'message': 'KEY_ERROR'}, status = 400)
 
         except ValidationError as e:
-            return JsonResponse({'MESSAGE' : (e.message)}, status = 400)
+            return JsonResponse({'message': (e.message)}, status = 400)
 
     def delete(self, request):
         try:
@@ -56,7 +56,7 @@ class PostingDetailView(View):
             encoded_db_psword   = posting.psword.encode('utf-8')
 
             if not bcrypt.checkpw(encoded_user_psword, encoded_db_psword):
-                return JsonResponse({'MESSAGE' : 'INVALID_PASSWORD'}, status = 401)
+                return JsonResponse({'message': 'INVALID_PASSWORD'}, status = 401)
 
             posting.delete()
 
@@ -69,8 +69,8 @@ class PostingDetailView(View):
 
 class PostingListView(View):
     def get(self, request):
-        offset   = int(request.GET.get('offset', 0))
-        limit    = int(request.GET.get('limit', 20))
+        offset = int(request.GET.get('offset', 0))
+        limit  = int(request.GET.get('limit', 20))
 
         q = Q()
 
