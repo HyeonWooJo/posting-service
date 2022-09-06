@@ -94,13 +94,15 @@ class PostingListView(View):
     # Response: 게시물 리스트
     '''
     def get(self, request):
-        offset = int(request.GET.get('offset', 0))
-        limit  = int(request.GET.get('limit', 20))
+        page = int(request.GET.get("page", 1) or 1)
+        page_size = 20
+        limit = int(page_size * page)
+        offset = int(limit - page_size)
 
         q = Q()
 
         postings = Posting.objects.filter(q).order_by('-created_at')\
-                    [offset:offset+limit]
+                    [offset:limit]
 
         results = [
             {
