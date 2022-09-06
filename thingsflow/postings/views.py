@@ -69,8 +69,8 @@ class PostingDetailView(View):
 
 class PostingListView(View):
     def get(self, request):
-        offset   = int(request.GET.get('offset', 0))
-        limit    = int(request.GET.get('limit', 20))
+        offset = int(request.GET.get('offset', 0))
+        limit  = int(request.GET.get('limit', 20))
 
         q = Q()
 

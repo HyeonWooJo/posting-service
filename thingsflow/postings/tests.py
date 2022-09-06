@@ -19,7 +19,6 @@ class PostingListView(TestCase):
     def tearDown(self):
         Posting.objects.all().delete()
 
-    # 자유게시판 리스트 조회 API unit test
     def test_success_list_view_get(self):
         client   = Client()
         response = client.get(
@@ -52,7 +51,7 @@ class PostingDetailView(TestCase):
         body     = {
             'title'   : 'Breaking Bad',
             'context' : 'Best American Drama',
-            'psword'  : '2asdfg',
+            'psword'  : 'test1234',
         }
         response = client.post(
             "/postings/detail",
