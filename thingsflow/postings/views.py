@@ -4,6 +4,7 @@ import bcrypt
 from django.core.exceptions import ValidationError
 from django.http            import JsonResponse
 from django.views           import View
+from django.db.models       import Q
 
 from .validation import validate_password
 from .models     import Posting
@@ -64,3 +65,25 @@ class PostingDetailView(View):
             return JsonResponse({"message": "KEY_ERROR"}, status=400)
         except Posting.DoesNotExist:
             return JsonResponse({"message": "POSTING_DOES_NOT_EXIST"}, status=400)
+
+
+class PostingListView(View):
+    def get(self, request):
+        offset   = int(request.GET.get('offset', 0))
+        limit    = int(request.GET.get('limit', 20))
+
+        q = Q()
+
+        postings = Posting.objects.filter(q).order_by('-created_at')\
+                    [offset:offset+limit]
+
+        results = [
+            {
+                "id": posting.id,
+                "title": posting.title,
+                "context": posting.context[:10],
+            }
+            for posting in postings
+        ]
+
+        return JsonResponse({"results": results}, status=200)
