@@ -1,11 +1,12 @@
 # 📎 목차
 
-1. [Posting Service]
-2. [요구사항 및 분석]
-4. [기술 스택]
-5. [API Endpoints]
-6. [ERD]
-7. [참조 문서]
+1. Posting Service
+2. 요구사항 및 분석
+3. 구현사항
+4. 기술 스택
+5. API Endpoints
+6. ERD
+7. 참조 문서
 
 <br>
 
@@ -46,9 +47,26 @@
 
 ---
 
+# 3. 구현사항
+
+## 1) 게시글 상세
+- 게시글 상세 포스팅 및 수정 API
+- 게시글 상세 포스팅 및 수정 API unit test
+- 게시글 상세 포스팅 삭제 API
+- 게시글 상세 포스팅 삭제 API unit test
+
+<br>
+
+## 2) 게시글
+- 게시글 리스트 조회 및 수정 API
+- 게시글 리스트 조회 및 수정 API unit test
 
 
-# 3. 기술 스택
+<br>
+
+---
+
+# 4. 기술 스택
 Language | Framwork | Database | HTTP | Tools
 | :----------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | 
 | <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> | <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white"> | <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> | <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"> | <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> 
@@ -58,7 +76,7 @@ Language | Framwork | Database | HTTP | Tools
 
 ---
 
-# 4. API Endpoints
+# 5. API Endpoints
 | endpoint | HTTP Method | 기능   | require parameter                                                                                                   | response data |
 |----------|-------------|------|---------------------------------------------------------------------------------------------------------------------|---------------|
 | postings  | GET   | 게시글 리스트 조회 |  없음  | 게시글 리스트 |
@@ -70,14 +88,14 @@ Language | Framwork | Database | HTTP | Tools
 
 ---
 
-# 5. ERD
+# 6. ERD
 ![](https://user-images.githubusercontent.com/65996045/188566128-49665194-0e28-4d1c-891f-e2a7ad382aec.png)
 
 <br>
 
 ---
 
-# 6. 참조 문서
+# 7. 참조 문서
 - [Postman API Docs](https://documenter.getpostman.com/view/21254145/VV4xww9H)
 
 
