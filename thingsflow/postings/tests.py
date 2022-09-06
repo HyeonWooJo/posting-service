@@ -1,4 +1,5 @@
-from email.quoprimime import body_check
+import bcrypt
+
 import json
 
 from django.test import TestCase, Client
@@ -39,7 +40,8 @@ class PostingDetailView(TestCase):
             id      = 1,
             title   = 'I am Saul good man',
             context = 'It is 프리퀄 of Breaking Bad',
-            psword  = '1asdfg'
+            psword  = bcrypt.hashpw('test1234'.encode('utf-8'), 
+            bcrypt.gensalt()).decode('utf-8')
         )
 
     def tearDown(self):
@@ -63,9 +65,9 @@ class PostingDetailView(TestCase):
     def test_success_detail_view_update(self):
         client   = Client()
         body     = {
-            'title'   : 'Breaking Bad',
-            'context' : 'Best American Drama',
-            'psword'  : '1asdfg',
+            'title'     : 'Breaking Bad',
+            'context'   : 'Best American Drama',
+            'psword'    : 'test1234',
             'posting_id': 1
         }
         response = client.post(
@@ -75,3 +77,17 @@ class PostingDetailView(TestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), {'message': 'UPDATED'})
+
+    def test_success_detail_view_delete(self):
+        client   = Client()
+        body     = {
+            'psword'    : 'test1234',
+            'posting_id': 1
+        }
+        response = client.delete(
+            "/postings/detail",
+            data=json.dumps(body),
+            content_type='application/json')
+
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(response.json(), {'message': 'DATA_DELETED'})
