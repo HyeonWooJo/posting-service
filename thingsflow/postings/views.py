@@ -10,7 +10,16 @@ from .validation import validate_password
 from .models     import Posting
 
 
+'''
+게시물 포스팅 상세 API
+'''
 class PostingDetailView(View):
+    '''
+    # 설명: 게시물 포스팅 API
+    # Method: POST
+    # uri: /postings/detail
+    # Response: 게시물 포스팅 혹은 수정 성공 여부(JSON)
+    '''
     def post(self, request):
         try :
             data       = json.loads(request.body)
@@ -45,6 +54,12 @@ class PostingDetailView(View):
         except ValidationError as e:
             return JsonResponse({'message': (e.message)}, status = 400)
 
+    '''
+    # 설명: 게시물 삭제 API
+    # Method: DELETE
+    # uri: /postings/detail
+    # Response: 게시물 삭제 성공 여부(JSON)
+    '''
     def delete(self, request):
         try:
             data        = json.loads(request.body)
@@ -67,7 +82,17 @@ class PostingDetailView(View):
             return JsonResponse({"message": "POSTING_DOES_NOT_EXIST"}, status=400)
 
 
+'''
+게시물 포스팅 리스트 API
+'''
 class PostingListView(View):
+    '''
+    # 설명: 게시물 리스트 조회 API
+    # Method: GET
+    # uri: /postings
+    # parameter: offset, limit
+    # Response: 게시물 리스트
+    '''
     def get(self, request):
         offset = int(request.GET.get('offset', 0))
         limit  = int(request.GET.get('limit', 20))
